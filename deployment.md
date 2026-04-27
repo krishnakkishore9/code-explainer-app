@@ -63,35 +63,33 @@ Streamlit's official platform is the **best and easiest** way to host this app f
 
 ---
 
-## 4. Deploy to Vercel (Alternative)
+## 4. Deploy to Vercel (Experimental)
 
-While Vercel is primarily for static sites and serverless APIs, you can deploy Streamlit using an unofficial wrapper or by configuring it as a serverless function. **Note: Streamlit Community Cloud is highly preferred.**
+Streamlit relies on persistent WebSocket connections, which are not natively supported by Vercel's Serverless Functions. However, you can deploy your project structure to Vercel using the provided `api/index.py` and `vercel.json` files.
 
-### Option A: Standard Vercel Python Deployment
-1. Install [Vercel CLI](https://vercel.com/cli): `npm install -g vercel`.
-2. run `vercel` in your project folder.
-3. Vercel will attempt to detect the Python framework. However, since Streamlit requires a persistent server, you must provide a `vercel.json` and a `api/index.py` entry point.
+### Steps to Deploy on Vercel:
 
-### Recommended Vercel Setup:
-Create a `vercel.json` in your root:
-```json
-{
-  "version": 2,
-  "builds": [
-    {
-      "src": "app.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "app.py"
-    }
-  ]
-}
-```
-*Note: Due to Streamlit's architecture, Vercel may experience timeout issues. For a production-ready deployment, use Streamlit Community Cloud or Azure/AWS.*
+1. **Install Vercel CLI**:
+   ```bash
+   npm install -g vercel
+   ```
+
+2. **Login to Vercel**:
+   ```bash
+   vercel login
+   ```
+
+3. **Deploy**:
+   ```bash
+   vercel
+   ```
+
+4. **Select Settings**:
+   - Set the root directory to your project folder.
+   - Vercel will automatically detect the `vercel.json` and use the `@vercel/python` builder.
+
+### Highly Recommended Alternative:
+For a stable experience with Streamlit, **Streamlit Community Cloud** is the industry standard and provides the persistent server connection your app needs to function without timeouts.
 
 ---
 
