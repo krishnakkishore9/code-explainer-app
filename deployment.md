@@ -67,26 +67,24 @@ Streamlit's official platform is the **best and easiest** way to host this app f
 
 Streamlit relies on persistent WebSocket connections, which are not natively supported by Vercel's Serverless Functions. However, you can deploy your project structure to Vercel using the provided `api/index.py` and `vercel.json` files.
 
-### Steps to Deploy on Vercel:
+### Option A: Deploy via Vercel CLI
+1. **Install CLI**: `npm install -g vercel`
+2. **Login**: `vercel login`
+3. **Deploy**: Run `vercel` in your project folder and follow the prompts.
 
-1. **Install Vercel CLI**:
-   ```bash
-   npm install -g vercel
-   ```
+### Option B: Deploy via Vercel Dashboard (Recommended for Beginners)
+1. **Login**: Go to [vercel.com](https://vercel.com) and sign in with GitHub.
+2. **New Project**: Click **"Add New"** → **"Project"**.
+3. **Import**: Find your `code-explainer-app` repository and click **"Import"**.
+4. **Environment Variables**: 
+   - Expand the **"Environment Variables"** section.
+   - Add Key: `OPENROUTER_API_KEY`
+   - Add Value: `your_actual_key_here`
+   - Click **"Add"**.
+5. **Deploy**: Click **"Deploy"**.
 
-2. **Login to Vercel**:
-   ```bash
-   vercel login
-   ```
-
-3. **Deploy**:
-   ```bash
-   vercel
-   ```
-
-4. **Select Settings**:
-   - Set the root directory to your project folder.
-   - Vercel will automatically detect the `vercel.json` and use the `@vercel/python` builder.
+> [!CAUTION]
+> **Streamlit on Vercel Limitations**: Streamlit uses WebSockets for real-time interaction. Vercel Serverless Functions have a 10-60s timeout. If you see "Connection Reset" errors, please use **Streamlit Community Cloud** instead.
 
 ### Highly Recommended Alternative:
 For a stable experience with Streamlit, **Streamlit Community Cloud** is the industry standard and provides the persistent server connection your app needs to function without timeouts.
